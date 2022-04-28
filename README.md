@@ -1,4 +1,4 @@
-# ProyectoPrimeraFase
+# ProyectoDemo
 
 #### Para poder ejectuar este proyecto se debe de tener instalado python y Dango, ademas es requerido instalar ciertas librerias y paquetes que son necesarios para el correcto funcionamiento del proyecto. A continuación se listan los comandos para instalar dichas librerias y paquetes:
 
