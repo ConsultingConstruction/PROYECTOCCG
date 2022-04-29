@@ -23,6 +23,7 @@ urlpatterns = [
     path('uniformat/', include('uniformat.urls')),
     path('Login/',include('Login.urls')),
     path('', include('ProyectoCCGApp.urls')),
+    path('accounts/',include('django.contrib.auth.urls')),
 
 ]
 

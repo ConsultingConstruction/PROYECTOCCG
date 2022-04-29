@@ -9,10 +9,10 @@ CHOICES=[('H','Hombre'),
 class LoginForm(ModelForm):
       class Meta:
        model = Usuario
-       fields =   ('correo','password',)
+       fields =   ('username','password',)
 
        widgets = {
-           'correo': forms.EmailInput(attrs={'type':'email','placeholder':'example@prueba.com', 'class':'item-mail'}),
+           'username': forms.TextInput(attrs={'placeholder':'example@prueba.com', 'id':'username', 'name':'idusername', 'class':'item-mail'}),
            'password': forms.PasswordInput(attrs={'placeholder': 'Contraseña...', 'class':'item-password'})
        }
 
