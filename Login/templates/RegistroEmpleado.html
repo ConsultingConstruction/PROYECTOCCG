@@ -1,0 +1,22 @@
+{% extends 'login.html' %} 
+{%load static%} 
+{%block Contenedor%}
+    <div class="content-formularioR">
+      <form method="post" class="form-control">
+        {% csrf_token %}
+        
+      </form>
+    </div>
+            <!-- <script src="{% static 'js/jquery.chained' %}"></script> -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{% static 'js/cod.js'%}"></script>
+    <script src="{% static 'js/chained.js'%}"></script>
+    <script>
+          $(function() {
+             $('#item_estado').chained('#item_pais');
+              $('#item_municipio').chained('#item_estado');
+             $('#item_cp').chained('#item_municipio');
+
+          })
+    </script>
+    {%endblock%}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ProyectoCCGApp',
     'uniformat',
     'crispy_forms',
+    'Login',
 ]
 
 MIDDLEWARE = [
@@ -80,9 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME':'C_CDATABASE',
-        'USER': 'eduardo',
-        'PASSWORD': '654321',
-        'HOST': 'CC-MX-BIM-005',  
+        'USER': 'israel',
+        'PASSWORD': 'israel123',
+        'HOST': 'CC-MX-BIM-009',  
         'PORT': '',
 
         'OPTIONS': {
@@ -130,10 +131,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
