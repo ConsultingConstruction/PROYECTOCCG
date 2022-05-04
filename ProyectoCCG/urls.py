@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('uniformat/', include('uniformat.urls')),
+    path('Login/',include('Login.urls'))
     path('', include('ProyectoCCGApp.urls')),
 ]
 
