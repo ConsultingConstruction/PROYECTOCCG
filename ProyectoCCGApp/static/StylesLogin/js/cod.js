@@ -2,3 +2,4 @@
 // nombre.removeAttribute('name');
 // nombre.setAttribute('name','idusername')
 
+// cp = document.querySelector('.cpOculto').setAttribute("type","hidden");

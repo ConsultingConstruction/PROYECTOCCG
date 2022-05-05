@@ -6,5 +6,7 @@ urlpatterns = [
     path('', home,name='index'),
     path('registrar/',registrarUsuario,name="registrarEmp"),
     path('menu/',MenuUsuario, name="menu"),
-    path('accounts/',include('django.contrib.auth.urls'),)
+    
+    #url de acceso
+    
 ]

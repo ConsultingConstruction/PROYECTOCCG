@@ -49,15 +49,12 @@ body{
 .inputs{
     width: 90%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    row-gap: 30px;
 }
-.inputs>input{
-    border: none;
-    height: 30px;
-    width: 300px;
-    border-radius: 10px;
 
-    
-}
 
 input:focus {
     border: none;
@@ -67,13 +64,7 @@ input:active {
     border: none;
 }
 
-.inputs label{
-    margin-right: 20px;
-    font-size: 20px;
-    color: white;
-    font-weight: 500;
-    text-shadow: 1px 1px 1px black;
-}
+
 
 .item-mail{
     margin-left: 34px;
@@ -176,3 +167,40 @@ input:active {
 .bt-out:hover {
     background-color: rgb(202, 68, 35);
 }
+
+
+
+/* FORMULARIO DE REGISTRO, PERSONAL */
+
+.content-formularioR{
+       width: 100%;
+      
+}
+
+.form-control{
+    width: 80%;
+    margin: auto;
+    background-color: #fff8;
+    border-radius: 5px;
+    padding: 20px;
+    
+   
+}
+
+.content-datos{
+   
+}
+
+
+
+.Boton-radio{
+    list-style: none;
+    display: flex;
+    column-gap: 20px;
+}
+
+.direction-content{
+  
+
+}
+

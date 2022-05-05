@@ -1,35 +1,78 @@
 from django.forms import ModelForm
-from .models import Usuario
+from .models import Usuario,Personal,Usuario
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+
+
 
 CHOICES=[('H','Hombre'),
          ('M','Mujer')]
 
 
-class LoginForm(ModelForm):
-      class Meta:
-       model = Usuario
-       fields =   ('username','password',)
+# 1.-FORMULARIO DEL LOGIN
+class LoginForm(forms.Form):
 
-       widgets = {
-           'username': forms.TextInput(attrs={'placeholder':'example@prueba.com', 'id':'username', 'name':'idusername', 'class':'item-mail'}),
-           'password': forms.PasswordInput(attrs={'placeholder': 'Contraseña...', 'class':'item-password'})
-       }
+      username = forms.CharField()
+      password = forms.CharField(widget=forms.PasswordInput())
+    # class Meta:
+    #    model = Usuario
+    #    fields =   ('username','password',)
 
-       labels = {
-           'correo':'Correo',
-           'password': 'Contraseña'
-       }
+    #    widgets = {
+    #        'username': forms.TextInput(attrs={'placeholder':'example@prueba.com', 'id':'idusername', 'name':'idusername', 'class':'item-mail'}),
+    #        'password': forms.PasswordInput(attrs={'placeholder': 'Contraseña...', 'class':'item-password', 'id':'id_password'})
+    #    }
+
+    #    labels = {
+    #        'correo':'Correo',
+    #        'password': 'Contraseña'
+    #    }
+
+
+    # def clean(self):
+    #     username = self.cleaned_data['username'] 
+    #     password = self.cleaned_data['password']
+
+    #     if not authenticate(username = username, password = password):
+    #         raise forms.validationError("Usuario o contraseña incorrecta")
     
 
 
-# class FormularioPersonal(ModelForm):
-#     class Meta:
-#      model = Personal
-#      fields = ('nombre','paterno','materno','genero','fechanac','lugarnac','rfc','curp','cel','calle','noint','noext')
+#2.-FORMULARIO DE EL PERSONAL
+class FormularioPersonal(ModelForm):
+    class Meta:
+     model = Personal
      
-#      widgets = {
-#         'fechanac' : forms.DateInput(attrs={'type': 'date'}),
-#         'genero' : forms.RadioSelect(choices = CHOICES, attrs={'class':'Boton-radio'})
-#     }
+    #  fields = ('nombre','materno','paterno','genero','fechanac','lugarnac','rfc','curp','cel','noint','noext','fk_usuario','fk_cp')
 
+     fields = ('nombre','paterno','materno','genero','fechanac','lugarnac','rfc','curp','cel','calle','noint','noext','fk_usuario','fk_cp')
+     
+     widgets = {
+        'fechanac' : forms.DateInput(attrs={'type': 'date'}),
+        'genero' : forms.RadioSelect(choices = CHOICES, attrs={'class':'Boton-radio'}),
+        'fk_cp' : forms.HiddenInput()
+    }
+
+
+# 3.- FORMULARIO DIRECCION
+
+
+# 4.- FORMULARIO DEL USUARIO
+class FormulariUsuario(ModelForm):
+    class Meta:
+     model = Usuario
+     fields = ('idusuario','username','password','rol')
+
+     labels = {
+           'correo':'Correo',
+           'password': 'Contraseña'
+       }
+     
+     widgets = {
+           'username': forms.TextInput(attrs={'placeholder':'example@prueba.com', 'id':'idusername', 'name':'idusername', 'class':'item-mail'}),
+           'password': forms.PasswordInput(attrs={'placeholder': 'Contraseña...', 'class':'item-password', 'id':'id_password'}),
+           'rol': forms.HiddenInput(attrs={'value':'Empleado'}),
+    
+           
+       }

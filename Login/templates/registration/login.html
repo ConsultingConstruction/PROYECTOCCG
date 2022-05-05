@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block titulo%} www.consulta.com {%endblock titulo%}</title>
         <link rel="stylesheet" href="{% static 'StylesLogin\css\styles.css'%}">
+       
         <link rel="stylesheet" href="{% block css %}{% static 'StylesLogin\css\stylesLogin.css' %}{% endblock %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -39,29 +40,41 @@
             </nav>
       </header>
       <div class="body-content">
-
+   
         {%block Contenedor%}
-        <form method="post">
+        <form method="POST" class="user">
             {% csrf_token %}
         <div class="background-form">
             <img class="img-header" src="https://mx.joblum.com/uploads/3/2819.jpg">
             <div class="inputs">
-           
-            <label>Correo:</label>
+             <label for="usuario">
+                 Usuario:
+                 <input type="mail" name="username" placeholder="example@constroction.com">
+             </label>
+             <label for="password">
+                 Contraseña:
+                <input type="password" name="password" placeholder="contraseña..">
+            </label>
+            <!-- <label>Correo:</label>
            {{form.username}}
            <br><br><br>
            <label>Contraseña:</label>
-           {{form.password}}
-        
+           {{form.password}} -->
+            {% if messages %}
+              {% for msg in messages %}
+              <b>{{msg}}</b>
+              {% endfor %}
+              {% endif %}
         </div>
         <input type="submit" value="Ingresar" class="bt bt-int">
         <input type="reset" value="Limpiar" class="bt bt-out">
         </div>
-        
+
+         <h2 style="background-color: red;">{{message}}</h2>
         </form>
         {%endblock%}
       </div>
-
+  
     </div>
 <script src="{% static 'StylesLogin\js\cod.js'%}"></script>
 </body>

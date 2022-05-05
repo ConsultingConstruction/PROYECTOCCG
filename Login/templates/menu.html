@@ -3,6 +3,9 @@
 {%load static%} 
 {%block Contenedor%}
 <h1>
-    Bienvenido
+
+   {% if request.session.username %}
+   {{request.session.username}} <a href="">Cerrar Sesion</a>
+   {% endif %}
 </h1>
 {% endblock%}
