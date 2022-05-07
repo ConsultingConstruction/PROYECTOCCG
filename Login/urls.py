@@ -1,12 +1,13 @@
 from django.urls import path,include
 
-from .views import home,registrarUsuario,MenuUsuario
+from . import views 
+
 
 urlpatterns = [
-    path('', home,name='index'),
-    path('registrar/',registrarUsuario,name="registrarEmp"),
-    path('menu/',MenuUsuario, name="menu"),
-    
-    #url de acceso
-    
+    path('', views.inicio, name='inicio'),
+    path('login/', views.home,name='index'),
+    path('registrar/',views.registrarUsuario,name="registrarEmp"),
+    path('menu/',views.MenuUsuario, name="menu"),
+    path('registrarV/',views.registrarVisistante,name='registrarVis'),
+    path('administrarU/',views.administrarUsuarios,name='adminUsers'),    #url de acceso   
 ]

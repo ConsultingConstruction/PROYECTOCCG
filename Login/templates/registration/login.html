@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block titulo%} www.consulta.com {%endblock titulo%}</title>
         <link rel="stylesheet" href="{% static 'StylesLogin\css\styles.css'%}">
-       
+        <link rel="stylesheet" href="{% static 'StylesLogin/css/stylesAdmin.css'%}">
         <link rel="stylesheet" href="{% block css %}{% static 'StylesLogin\css\stylesLogin.css' %}{% endblock %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -27,21 +27,22 @@
       <header class="cabecera">
             <nav class="barra-navegacion">
                 <ul class="lista">
-                    <li class="l-lista"><a href="{% url 'index' %}">INICIO</a></li>
+                    <li class="l-lista"><a href="{% url 'inicio' %}">INICIO</a></li>
                     <li class="l-lista bt-activate">REGISTRARSE
                         <ul class="sublist-register">
                             <li class="ul-register"><a href="{% url 'registrarEmp' %}"><div>Empleado</div></a></li>
-                            <li class="ul-register"><a href=""><div>Visitante</div></a></li>
+                            <li class="ul-register"><a href="{% url 'registrarVis' %}"><div>Visitante</div></a></li>
                         </ul>
                     </li>
                     
-                    <li class="l-lista"><a href="#">INGRESAR</a></li>
+                    <li class="l-lista"><a href="{% url 'index' %}">INGRESAR</a></li>
                 </ul>
             </nav>
       </header>
+      {%block Contenedor%}
       <div class="body-content">
    
-        {%block Contenedor%}
+        
         <form method="POST" class="user">
             {% csrf_token %}
         <div class="background-form">
@@ -72,9 +73,9 @@
 
          <h2 style="background-color: red;">{{message}}</h2>
         </form>
-        {%endblock%}
+        
       </div>
-  
+      {%endblock%}
     </div>
 <script src="{% static 'StylesLogin\js\cod.js'%}"></script>
 </body>

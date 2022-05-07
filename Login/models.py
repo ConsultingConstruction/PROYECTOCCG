@@ -76,3 +76,18 @@ class Personal(models.Model):
         db_table = 'Personal'
 
 
+class Invitado(models.Model):
+    idinvitado = models.AutoField(db_column='idInvitado', primary_key=True)  # Field name made lowercase.
+    nombre = models.CharField(db_column='Nombre', max_length=45, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    paterno = models.CharField(db_column='Paterno', max_length=45, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    materno = models.CharField(db_column='Materno', max_length=45, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    cargo = models.CharField(db_column='Cargo', max_length=60, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    cel = models.CharField(db_column='Cel', max_length=12, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    orgprocedencia = models.CharField(db_column='orgProcedencia', max_length=60, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    descripcion = models.CharField(db_column='Descripcion', max_length=250, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    fk_usuario = models.IntegerField(db_column='fk_Usuario', blank=True, null=True)  # Field name made lowercase.
+    fk_mundeleg = models.IntegerField(db_column='fk_MunDeleg', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Invitado'

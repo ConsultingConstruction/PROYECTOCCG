@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Usuario,Personal,Usuario
+from .models import Usuario,Personal,Usuario,Invitado
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
@@ -15,6 +15,7 @@ class LoginForm(forms.Form):
 
       username = forms.CharField()
       password = forms.CharField(widget=forms.PasswordInput())
+
     # class Meta:
     #    model = Usuario
     #    fields =   ('username','password',)
@@ -76,3 +77,20 @@ class FormulariUsuario(ModelForm):
     
            
        }
+
+class FormularioInvitado(ModelForm):
+      class Meta:
+            model = Invitado
+            fields = '__all__'
+        
+            widgets = {
+            'descripcion': forms.Textarea(attrs={'placeholder':'description.....'}),
+            'nombre': forms.TextInput(attrs={'placeholder':'Name..'}),
+            'paterno': forms.TextInput(attrs={'placeholder':'Apellido Paterno'}),
+            'materno': forms.TextInput(attrs={'placeholder':'Apellido Materno..'}),
+            'cargo': forms.TextInput(attrs={'placeholder':'Cargo..'}),
+            'cel': forms.TextInput(attrs={'placeholder':'Telefono..', 'type':'number'}),
+            'orgprocedencia': forms.TextInput(attrs={'placeholder':'Organizacion de procedencia..'}),
+            }
+
+            

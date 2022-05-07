@@ -199,8 +199,128 @@ input:active {
     column-gap: 20px;
 }
 
-.direction-content{
-  
 
+
+/* ESTILOS DE LA PLANTILLA VISITANTE */
+.visitante{
+    width: 80%;
+    margin: auto;
+    position: relative;
+    background-color: #fff;
+    border-radius: 12px;
+}
+.headerform{
+   height: 50px;
+   width: 100%;
+   background-color: #55f;
+   position: absolute;
+   top: -40px;
+   border-radius: 12px 12px 0 0;
+   text-align: center;
+   padding-top: 5px;
+   font-size: 25px;
+   color: #fff;
+   text-shadow: 2px 2px 2px black;
+   letter-spacing: 3px;
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.content-description{
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(6,1fr);
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  align-items: center;
+ 
 }
 
+.content-description>input{
+    height: 30px;
+    width: 200px;
+    border-radius: 3px;
+    border: 1px solid rgb(235, 235, 235);
+    margin-right: 130px;
+}
+
+.content-description>label{
+}
+
+.content-description>input:hover {
+    background-color: #ccc;
+}
+
+.datos-personales{
+    position: absolute;
+    top:10px;
+}
+
+.div-textarea{
+     width: 50%;
+     margin: auto;
+     margin-top: 10px;
+}
+
+textarea{
+    
+    border: none;
+    resize: none;
+    box-shadow: 2px 2px 2px black;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.content-paises{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    width: 80%;
+    margin: auto;
+    justify-items: center;
+    padding-bottom: 20px;
+}
+
+.bt-submit-visitante{
+    width: 130px;
+    height: 40px;
+    margin: 20px;
+    background-color: rgb(131, 177, 131);
+    border: none;
+    border-radius: 12px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.bt-submit-visitante:hover {
+    background-color: rgb(148, 223, 148);
+}
+
+.content-credenciales{
+
+    margin: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: grid;
+    width: 100%;
+    background-color: red;
+    height: 150px;
+    grid-template-columns: repeat(2,200px);
+}
+
+.cred{
+    display: flex;
+    column-gap: 10px;
+    
+    position: relative;
+    
+}
+
+.bt-mostrarPass{
+    background-color: rgb(235, 235, 235); 
+    width: 150px; height: 40px; 
+    cursor: pointer; 
+    position: absolute; 
+    text-align: center; 
+    line-height: 40px; 
+    border-radius: 10px;
+    
+}
