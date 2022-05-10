@@ -171,35 +171,108 @@ input:active {
 
 
 /* FORMULARIO DE REGISTRO, PERSONAL */
-
-.content-formularioR{
-       width: 100%;
-      
-}
-
 .form-control{
     width: 80%;
     margin: auto;
-    background-color: #fff8;
-    border-radius: 5px;
-    padding: 20px;
-    
-   
+    position: relative;
+    background-color: #fff;
+    border-radius: 12px;
+}
+
+.content-formularioR{
+    width: 100%;
+    margin-top: 200px;
 }
 
 .content-datos{
-   
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(6,1fr);
+    align-items: center;
+    width: 100%;
+    height: 220px;
+    padding: 40px;
+    justify-items:self-start;
+    padding-top: 40px;
 }
 
+.content-datos>label{
+    width: 100%;
+}
 
+.headerformE{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(148, 31, 10);
+    position: absolute;
+    top: -40px;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 25px;
+    color: #fff;
+    text-shadow: 2px 2px 2px black;
+    letter-spacing: 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.datos-personalesE{
+    position: absolute;
+    top:20px;
+}
 
 .Boton-radio{
     list-style: none;
     display: flex;
-    column-gap: 20px;
+    column-gap: 15px;
+   
 }
 
+.Boton-radio>li>label{
+    display: flex;
+    column-gap: 5px;
+}
 
+.direction-content{
+    padding: 40px;
+    position: relative;
+
+    /* padding-top: 40px; */
+}
+
+.direccion-cnn{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    justify-items:self-start;
+}
+
+.content-paisesE{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    width: 80%;
+    margin: auto;
+    justify-items: center;
+    padding-bottom: 40px;
+}
+
+.datos-personalesED{
+    position: absolute;
+    top:4px;
+}
+
+.bt-enviar-registro{
+    width: 130px;
+    height: 40px;
+    background-color: rgb(131, 177, 131);
+    border: none;
+    border-radius: 12px;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+
+  .bt-enviar-registro:hover {
+    background-color: rgb(148, 223, 148);
+}
 
 /* ESTILOS DE LA PLANTILLA VISITANTE */
 .visitante{
@@ -294,33 +367,36 @@ textarea{
     background-color: rgb(148, 223, 148);
 }
 
-.content-credenciales{
-
+.content-credenciales{ 
+    display: flex;
     margin: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
     display: grid;
     width: 100%;
-    background-color: red;
-    height: 150px;
-    grid-template-columns: repeat(2,200px);
+    grid-template-columns: repeat(4,1fr);
+    justify-content: flex-start;
+
 }
 
-.cred{
-    display: flex;
-    column-gap: 10px;
-    
-    position: relative;
-    
+.content-credenciales>label>input{
+   height: 30px;
 }
 
 .bt-mostrarPass{
     background-color: rgb(235, 235, 235); 
-    width: 150px; height: 40px; 
+    width: 200px; 
+    height: 30px; 
     cursor: pointer; 
-    position: absolute; 
     text-align: center; 
-    line-height: 40px; 
+    line-height: 30px; 
     border-radius: 10px;
     
+
+    
 }
+
+.ContainerVisitante{
+  margin-top: 200px;
+}
+

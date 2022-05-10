@@ -23,6 +23,7 @@
 
 
 <body>
+{% block menuregistro %}
     <div class="container">
       <header class="cabecera">
             <nav class="barra-navegacion">
@@ -39,6 +40,7 @@
                 </ul>
             </nav>
       </header>
+{% endblock %}
       {%block Contenedor%}
       <div class="body-content">
    
@@ -48,36 +50,28 @@
         <div class="background-form">
             <img class="img-header" src="https://mx.joblum.com/uploads/3/2819.jpg">
             <div class="inputs">
-             <label for="usuario">
-                 Usuario:
-                 <input type="mail" name="username" placeholder="example@constroction.com">
-             </label>
-             <label for="password">
-                 Contraseña:
-                <input type="password" name="password" placeholder="contraseña..">
-            </label>
-            <!-- <label>Correo:</label>
-           {{form.username}}
-           <br><br><br>
-           <label>Contraseña:</label>
-           {{form.password}} -->
-            {% if messages %}
-              {% for msg in messages %}
-              <b>{{msg}}</b>
-              {% endfor %}
-              {% endif %}
+             <label for="usuario">Usuario:</label>
+             {{form.username}}
+             <label for="password">Contraseña:</label>
+             {{form.password}}
+            
         </div>
         <input type="submit" value="Ingresar" class="bt bt-int">
         <input type="reset" value="Limpiar" class="bt bt-out">
         </div>
-
-         <h2 style="background-color: red;">{{message}}</h2>
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li class="{{ message.tags }}" style="background-color: rgb(235, 104, 104); position: absolute; bottom: 0; line-height: 40px; font-size: 25px; height: 40px; text-align: center; width: 100%; margin: auto; list-style: none; color: white;">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
         </form>
-        
+
       </div>
       {%endblock%}
     </div>
-<script src="{% static 'StylesLogin\js\cod.js'%}"></script>
+
 </body>
 
 </html>

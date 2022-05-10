@@ -5,86 +5,121 @@
 {%block Contenedor%}
     <div class="content-formularioR">
        
-      <form method="post" class="form-control">
+      <form method="post" class="form-control" id="fomularioE" autocomplete="off">
         {% csrf_token %}
-        <div><h1>Informacion:</h1></div>    
-        <div class="content-datos"> 
-                <label>Nombre:</label> {{formP.nombre}}
-                <label>Apellido Paterno:</label> {{formP.paterno}}
-                <label>Apellido Materno:</label> {{formP.materno}}
-                <label>Genero:</label> {{formP.genero}}
-                <label>Fecha de Nacimiento:</label> {{formP.fechanac}}
-                <label>Lugar de Nacimiento:</label> {{formP.lugarnac}}
-                <label>RFC:</label> {{formP.rfc}}
-                <label>CURP: </label> {{formP.curp}}
-                <label>Telefono:</label> {{formP.cel}}
+        <div class=" headerformE">FORMULARIO DE EMPLEADO</div>   
+        <div class="content-datos">
+          <h3 class="datos-personalesE">Datos Personales:</h3>
+        
+                <label>Nombre:</label> 
+                {{formP.nombre}}
+                <label>Apellido Paterno:</label> 
+                {{formP.paterno}}
+                <label>Apellido Materno:</label> 
+                {{formP.materno}}
+                <label>Genero: </label>
+                {{formP.genero}}
+                <label>Fecha de Nacimiento: </label>
+                {{formP.fechanac}}
+                <label>Lugar de Nacimiento: </label>
+                {{formP.lugarnac}}
+                <label>RFC: </label>
+                {{formP.rfc}}
+                <label>CURP:  </label>
+                {{formP.curp}}
+                <label>Telefono:</label> 
+                {{formP.cel}}
            </div>
-           <br>
+
            <hr>
-           <br>
-      <div><h1>Direccion:</h1></div>
+          
+           
+           
        <div class="direction-content">
+                   <h3 class="datos-personalesED">Datos Personales:</h3>
+                    <div class="direccion-cnn">
                     <label>Calle:</label> {{formP.calle}}
                     <label>Numero Interio:</label> {{formP.noint}}
                     <label>Numero Exterior:</label> {{formP.noext}}
-
-                    <!-- PAIS  -->
-                    <label>PAIS
-                    <select class="select-list" id="item_pais">
-                    <option value ="">------</option>
-                    {% for item_pais in pais%}
-                    <option value="{{item_pais.idpais}}">
-                    {{item_pais.nombre}}
-                    </option>
-                    {%endfor%}
-                    </select></label>
-
-                    <!-- ESTADO -->
-                    <label>ESTADO</label>
-                    <select class="select-list" id="item_estado">
-   <option value ="">------</option>
-     {% for item_estado in estado%}
-    <option value="{{item_estado.idestado}}" data-chained="{{item_estado.fk_pais}}">
-     {{item_estado.nombre}}
-   </option>
-   {%endfor%}
-          </select>
-
-                    <!-- MUNICPIO -->
-                    <label>MUNICIPIO</label>
-                    <select class="select-list" id="item_municipio">
-   <option value ="">------</option>
-   {% for item_municipio in municipio%}
-   <option value="{{item_municipio.idmundeleg}}" data-chained="{{item_municipio.fk_estado}}">
-      {{item_municipio.nombre}}
-   </option>
-   {%endfor%}
-          </select>
-
-                    <!-- CP -->
-                    <label>CODIGO POSTAL</label>
-                    <select class="select-list" id="item_cp" name="cp">
-   <option value ="">------</option>
-      {% for item_cp in cp%}
-         <option value="{{item_cp.cp}}" data-chained="{{item_cp.fk_mpiodel}}">
-         {{item_cp.cp}}
-        </option>
-      {%endfor%}
-          </select>
-           <br>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="content-paises">
+                      <!-- SELECT PAIS -->
+                      <label>PAIS
+                          <select class="select-list" id="item_pais">
+                            <option value ="">------</option>
+                              {% for item_pais in pais%}
+                                <option value="{{item_pais.idpais}}">
+                                 {{item_pais.nombre}}
+                                </option>
+                              {%endfor%}
+                          </select>
+                      </label>
+              
+                  <!-- SELECT ESTADO -->
+                      <label>ESTADO
+                          <select class="select-list" id="item_estado">
+                            <option value ="">------</option>
+                              {% for item_estado in estado%}
+                                <option value="{{item_estado.idestado}}" data-chained="{{item_estado.fk_pais}}">
+                                  {{item_estado.nombre}}
+                                </option>
+                              {%endfor%}
+                          </select>
+                      </label>
+              
+                       <!-- MUNICPIO -->
+                      <label>MUNICIPIO
+                          <select class="select-list" id="item_municipio" name="mundeleg">
+                            <option value ="">------</option>
+                              {% for item_municipio in municipio%}
+                                <option value="{{item_municipio.idmundeleg}}" data-chained="{{item_municipio.fk_estado}}">
+                                  {{item_municipio.nombre}}
+                                </option>
+                              {%endfor%}
+                          </select>
+                      </label>
+              
+                   <!-- SELECT CODIGO POSTAL -->
+                      <label>CODIGO POSTAL
+                        <select class="select-list" id="item_cp" name="cp">
+                           <option value ="">------</option>
+                             {% for item_cp in cp%}
+                               <option value="{{item_cp.cp}}" data-chained="{{item_cp.fk_mpiodel}}">
+                                 {{item_cp.cp}}
+                               </option>
+                             {%endfor%}
+                        </select>
+                      </label>
+                  </div>
            <hr>
-           <br>
-          <div><h1>Credenciales:</h1></div>
-          {{formU}}
-                    <input type="submit" value="Registrar" class="bt-enviar-registro">
-          </div>
+              <div class="content-credenciales">
+                <h3>Credenciales de Ingreso</h3>
+       
+                 <label>Usuario: {{formU.username}}</label>   
+ 
+                 <label>Contraseña: {{formU.password}} </label>
+                 
+                 <div class="bt-mostrarPass"  id="mostrarpass">Mostrar</div>
+              
+              </div>
+                   <center> <input type="submit" value="Registrar" class="bt-enviar-registro"></center>
+          
           
       </form>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}" style="background-color: rgb(235, 104, 104); position: absolute; bottom: 0; line-height: 40px; font-size: 25px; height: 40px; text-align: center; width: 100%; margin: auto; list-style: none; color: white;">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     </div>
             <!-- <script src="{% static 'js/jquery.chained' %}"></script> -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="{% static 'StylesLogin/js/cod.js'%}"></script>
     <script src="{% static 'StylesLogin/js/chained.js'%}"></script>
+    <script src="{%static 'StylesLogin/js/validacionFormEmpleado.js'%}"></script>
     <script>
           $(function() {
              $('#item_estado').chained('#item_pais');
@@ -93,4 +128,5 @@
 
           })
     </script>
+    
     {%endblock%}

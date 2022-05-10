@@ -77,13 +77,13 @@
 <hr>
        <div class="content-credenciales">
            <h3>Credenciales de Ingreso</h3>
-               <div class="cred">
-                <label>Usuario: </label>   
-                {{formU.username}}
-                <label>Contraseña: </label>
-                {{formU.password}}
-                <div class="bt-mostrarPass"  id="mostrarpass" style="">Mostrar Cotraseña</div>
-               </div>
+      
+                <label>Usuario: {{formU.username}}</label>   
+
+                <label>Contraseña: {{formU.password}} </label>
+                
+                <div class="bt-mostrarPass"  id="mostrarpass">Mostrar</div>
+             
        </div>
         <div class="div-textarea">
             <h4>Descripcion</h4> 
@@ -100,7 +100,7 @@
     {% if messages %}
   <ul class="messages">
     {% for message in messages %}
-      <li class="{{ message.tags }}" style="background-color: blue; width: 500px; margin: auto; list-style: none;">{{ message }}</li>
+      <li class="{{ message.tags }}" style="background-color: rgb(235, 104, 104); line-height: 40px; font-size: 25px; height: 40px; text-align: center; width: 80%; margin: auto; list-style: none; color: white;">{{ message }}</li>
     {% endfor %}
   </ul>
 {% endif %}

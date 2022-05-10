@@ -37,13 +37,13 @@ let regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<
                 alert("nombre no valido");
                 e.preventDefault();
                 
-            }else if(paterno.length == 0 || paterno <3){
+            }else if(paterno.length == 0 || paterno.length <3){
                 alert('Apellido paterno no valido');
                 e.preventDefault();
-            }else if(materno.length == 0 || materno <3){
+            }else if(materno.length == 0 || materno.length <3){
                 alert("Apellido materno no valido");
                 e.preventDefault();
-            }else if(cargo.length == 0 || cargo < 3){
+            }else if(cargo.length == 0 || cargo.length < 3){
                 alert('cargo no valido');
                 e.preventDefault();
             }else if(!numero.match(aceptado) || numero.length < 10){
@@ -58,7 +58,7 @@ let regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<
             }else if (!(regex.test(usuario))){
                 alert("La dirección de email " + usuario + " es incorrecta");
                 e.preventDefault();
-               }else if(password<4){
+               }else if(password.length<4){
                 alert("Contraseña muy corta")
                }else if(textarea.length<10){
                      alert('Descripcion demasiada corta')

@@ -40,12 +40,14 @@ class Cp(models.Model):
     class Meta:
         managed = False
         db_table = 'CP'
-
+    
+CHOICESUSER = [('Empleado','Empleado'),
+               ('Visitante','Visitante')]
 class Usuario(models.Model):
     idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
-    username = models.CharField(db_column='Correo', unique=True, max_length=50, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    username = models.CharField(db_column='Correo', max_length=50, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=20, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
-    rol = models.CharField(db_column='Rol', max_length=15, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    rol = models.CharField(db_column='Rol', max_length=15, db_collation='Modern_Spanish_CI_AS', blank=True, null=True, choices=CHOICESUSER)  # Field name made lowercase.
     fechacreacion = models.DateTimeField(db_column='fechaCreacion', blank=True, null=True,auto_now=True)  # Field name made lowercase.
     fechaact = models.DateTimeField(db_column='fechaAct',default=timezone.now)  # Field name made lowercase.
 
@@ -64,12 +66,12 @@ class Personal(models.Model):
     lugarnac = models.CharField(db_column='lugarNac', max_length=45, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     rfc = models.CharField(db_column='RFC', max_length=13, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     curp = models.CharField(db_column='CURP', max_length=18, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
-    cel = models.CharField(db_column='Cel', max_length=12, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    cel = models.CharField(db_column='Cel', db_collation='Modern_Spanish_CI_AS', blank=True, null=True, max_length=10)  # Field name made lowercase.
     calle = models.CharField(db_column='Calle', max_length=45, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     noint = models.IntegerField(db_column='noInt', blank=True, null=True)  # Field name made lowercase.
     noext = models.IntegerField(db_column='noExt', blank=True, null=True)  # Field name made lowercase.
     fk_usuario = models.IntegerField(db_column='fk_Usuario', blank=True, null=True)  # Field name made lowercase.
-    fk_cp = models.IntegerField(db_column='fk_CP', blank=True, null=True)  # Field name made lowercase.
+    fk_cp = models.IntegerField(db_column='fk_CP', blank=True, null=True,max_length=5)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -85,8 +87,8 @@ class Invitado(models.Model):
     cel = models.CharField(db_column='Cel', max_length=12, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     orgprocedencia = models.CharField(db_column='orgProcedencia', max_length=60, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     descripcion = models.CharField(db_column='Descripcion', max_length=250, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
-    fk_usuario = models.IntegerField(db_column='fk_Usuario', blank=True, null=True)  # Field name made lowercase.
-    fk_mundeleg = models.IntegerField(db_column='fk_MunDeleg', blank=True, null=True)  # Field name made lowercase.
+    fk_usuario = models.ForeignKey(Usuario,db_column='fk_Usuario', blank=True, null=True, on_delete= models.CASCADE)  # Field name made lowercase.
+    fk_mundeleg = models.ForeignKey(Mundeleg, on_delete = models.CASCADE,db_column='fk_MunDeleg', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

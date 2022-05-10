@@ -3,7 +3,13 @@
 {%load static%} 
 {%block Contenedor%}
 <h1>
-
+   {% if messages %}
+   <ul class="messages">
+     {% for message in messages %}
+       <li class="{{ message.tags }}" style="background-color: rgb(235, 104, 104); position: absolute; bottom: 0; line-height: 40px; font-size: 25px; height: 40px; text-align: center; width: 100%; margin: auto; list-style: none; color: white;">{{ message }}</li>
+     {% endfor %}
+   </ul>
+ {% endif %}
    {% if request.session.username %}
    {{request.session.username}} <a href="">Cerrar Sesion</a>
    {% endif %}

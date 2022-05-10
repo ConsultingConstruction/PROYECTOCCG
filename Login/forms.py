@@ -11,11 +11,15 @@ CHOICES=[('H','Hombre'),
 
 
 # 1.-FORMULARIO DEL LOGIN
-class LoginForm(forms.Form):
-
-      username = forms.CharField()
-      password = forms.CharField(widget=forms.PasswordInput())
-
+class FormularionLogin(ModelForm):
+    class Meta: 
+        model = Usuario
+        fields = ('username','password')
+        
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder':'Nombre de Usuario'}),
+            'password': forms.TextInput(attrs={'type':'password','placeholder':'Contraseña'})
+        }
     # class Meta:
     #    model = Usuario
     #    fields =   ('username','password',)
@@ -50,9 +54,19 @@ class FormularioPersonal(ModelForm):
      fields = ('nombre','paterno','materno','genero','fechanac','lugarnac','rfc','curp','cel','calle','noint','noext','fk_usuario','fk_cp')
      
      widgets = {
-        'fechanac' : forms.DateInput(attrs={'type': 'date'}),
+         'nombre': forms.TextInput(attrs={'placeholder':'Nombre..',}),
+         'paterno': forms.TextInput(attrs={'placeholder':'Apellido paterno..',}),
+         'materno': forms.TextInput(attrs={'placeholder':'Apellido materno..',}),
+         'rfc': forms.TextInput(attrs={'placeholder':'RFC..',}),
+         'curp': forms.TextInput(attrs={'placeholder':'CURP..',}),
+         'lugarnac': forms.TextInput(attrs={'placeholder':'Lugar de nacimiento..',}),
+         'calle': forms.TextInput(attrs={'placeholder':'Calle..',}),
+         'noint': forms.TextInput(attrs={'placeholder':'Numero interior..',}),
+         'noext': forms.TextInput(attrs={'placeholder':'Numero exterior..',}),
+        'fechanac' : forms.DateInput(attrs={'type': 'date',}),
         'genero' : forms.RadioSelect(choices = CHOICES, attrs={'class':'Boton-radio'}),
-        'fk_cp' : forms.HiddenInput()
+        'fk_cp' : forms.HiddenInput(),
+        'cel' : forms.TextInput(attrs={'type':'number','placeholder':'Tel..'}),
     }
 
 
@@ -93,4 +107,9 @@ class FormularioInvitado(ModelForm):
             'orgprocedencia': forms.TextInput(attrs={'placeholder':'Organizacion de procedencia..'}),
             }
 
-            
+class formUser(ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ('username','password','rol')
+        
+ 

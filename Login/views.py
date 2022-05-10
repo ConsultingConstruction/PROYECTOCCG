@@ -1,14 +1,15 @@
-from django.shortcuts import render,redirect
-from .forms import LoginForm,FormularioPersonal,FormulariUsuario,FormularioInvitado
+from django.shortcuts import render,redirect, get_object_or_404
+from .forms import FormularionLogin,FormularioPersonal,FormulariUsuario,FormularioInvitado,formUser
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from .models import Usuario,Pais,Estado,Mundeleg,Cp,Personal
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ValidationError
 
 
 def inicio(request):
-    return render(request,'inicio.html')
+    return render(request,'inicio.html',)
 
 
 # def home(request):
@@ -35,21 +36,32 @@ def inicio(request):
 #          form = LoginForm()
       
 #       return render(request,'registration/login.html',{'form':form,'message':message},)
-     
-def home(request):
+def logoutSalir(request):
+    logout(request)
+    messages.info(request, 'Sliste exitosamente')
+    return redirect('index')
+
+  
+def loginEntrar(request): 
+      
+
       if request.method == 'POST':
-         try:
-            datosUsuario = Usuario.objects.get(username=request.POST['username'],password=request.POST['password'])
-            print('Usuario = ',datosUsuario)
-            request.session['username']=datosUsuario.username
-            return render(request,'menu.html')
-         except Usuario.DoesNotExist as e:
-               messages.success(request,'nombre o contraseña incorecta')
-      return render(request,'registration/login.html',{},)
+           form = FormularionLogin(request.POST)
+           if form.is_valid():
+              usuario = request.POST.get('username')
+              contrasena = request.POST.get('password')
+              conf = Usuario.objects.filter(username=usuario,password=contrasena).exists()
+              if conf:
+                 messages.info(request,'bienvenido '+usuario)
+                 return redirect('menu')
+              else:
+                 messages.warning(request,'Usuario o contraseña incorrecta')
+      form = FormularionLogin()
+      return render(request,'registration/login.html',{'form':form})
 
 
 
-@login_required
+
 def MenuUsuario(request):
       return render(request,'menu.html')
 
@@ -72,12 +84,20 @@ def registrarUsuario(request):
                 new_formU.rol = 'Empleado'
                 value_cp = request.POST.get('cp')
                 new_formP.fk_cp = value_cp
-                new_formU.save()
-                print(formP.errors)
-                new_formP.fk_usuario = new_formU.idusuario
-                print(formP.errors)
-                new_formP.save()
-
+                value_username = request.POST.get('username')
+                userN = Usuario.objects.filter(username=value_username).exists()
+                if userN:
+                    messages.warning(request,'El usuario '+value_username+' ya se encuentra registrado')
+                else:
+                  new_formU.save()
+                  print(formP.errors)
+                  new_formP.fk_usuario = new_formU.idusuario
+                  print(formP.errors)
+                  new_formP.save()
+                  messages.success(request, 'Bienvenido '+value_username) 
+                  return redirect('registrarEmp')
+             else:
+                  messages.warning(request, 'Ha ocuurido un error.')
         else:
               formU = FormulariUsuario()
               formP = FormularioPersonal()
@@ -86,45 +106,71 @@ def registrarUsuario(request):
 def registrarVisistante(request):
 
         
-        pais = Pais.objects.all()
-        estado = Estado.objects.all()
-        municipio = Mundeleg.objects.all()
-        cp = Cp.objects.all()
-        messages
-        if request.method == 'POST':
-          formV = FormularioInvitado(request.POST)
-          formU = FormulariUsuario(request.POST)
-          print(formV.errors)
-          if formV.is_valid() and formU.is_valid():
-             new_formV = formV.save(commit=False)
-             new_formU = formU.save(commit=False)
-             new_formU.rol = 'Visitante'
-             value_mun = request.POST.get('mundeleg')
-             new_formV.fk_mundeleg = value_mun
-             new_formU.save()
-             new_formV.fk_usuario = new_formU.idusuario
-             print(formV.errors)
-             new_formV.save()
+      pais = Pais.objects.all()
+      estado = Estado.objects.all()
+      municipio = Mundeleg.objects.all()
+      cp = Cp.objects.all()
+      if request.method == 'POST':
+            formV = FormularioInvitado(request.POST)
+            formU = FormulariUsuario(request.POST)
+            print(formU.errors)
+            if formV.is_valid() and formU.is_valid():
+                 new_formV = formV.save(commit=False)
+                 new_formU = formU.save(commit=False)
+                 new_formU.rol = 'Visitante'
+                 value_mun = request.POST.get('mundeleg')
+                 new_formV.fk_mundeleg = value_mun
+                 value_username = request.POST.get('username')
+                 userN = Usuario.objects.filter(username=value_username).exists()
+                 if userN:
+                    messages.warning(request,'El usuario '+value_username+' ya se encuentra registrado')
+                 else:
+                  new_formU.save()
+                  new_formV.fk_usuario = new_formU.idusuario
+                  print(formV.errors)
+                  new_formV.save()
+                  messages.success(request, 'Bienvenido '+value_username) 
+                  return redirect('registrarVis')     
+            else:
+                 messages.warning(request, 'Ha ocuurido un error.')
              
-             messages.success(request, 'Your password was updated successfully!') 
-             return redirect('registrarVis')
-          else:
-             messages.warning(request, 'Please correct the error below.')
-             
-        else:
-             formU = FormulariUsuario()
-             formV = FormularioInvitado()
+      else:
+         formU = FormulariUsuario()
+         formV = FormularioInvitado()
 
               
-        return render(request,'RegistroVisitante.html',{'pais':pais,'estado':estado,'municipio':municipio, 'cp': cp,'formU':formU,'formV':formV},)
+      return render(request,'RegistroVisitante.html',{'pais':pais,'estado':estado,'municipio':municipio, 'cp': cp,'formU':formU,'formV':formV},)
 
 
 
 def administrarUsuarios(request):
-      usuarios = Usuario.objects.all()
+      usuarios = Usuario.objects.exclude(rol ='Admin')
       
       contexto={
          'usuarios':usuarios,
-      }
-      
+          }
       return render(request,'AdministrarUsuarios.html',contexto)
+
+
+
+def EditarUser(request,id):
+      user = get_object_or_404(Usuario,idusuario=id)
+      data={
+         'form':formUser(instance=user),
+      }
+
+      if request.method=='POST':
+         formulario = formUser(data=request.POST, instance=user, files = request.FILES)
+         if formulario.is_valid():
+            formulario.save()
+            messages.success(request,'La modificacion se realizo correctamente')
+         else:
+            message.warning(request,'La modificacion no se pude realizar')
+         data['form'] = formulario
+      return render(request,'Crud/AdminEditar.html',data)
+
+
+def EliminarUsuario(request,id):
+     usern = get_object_or_404(Usuario, idusuario = id)
+     usern.delete()
+     return redirect('adminUsers')
