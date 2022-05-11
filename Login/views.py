@@ -36,28 +36,41 @@ def inicio(request):
 #          form = LoginForm()
       
 #       return render(request,'registration/login.html',{'form':form,'message':message},)
-def logoutSalir(request):
-    logout(request)
-    messages.info(request, 'Sliste exitosamente')
+def logoutSalir(request,username):
+    usuarioLogout = Usuario.objects.get(username=username)
+    usuarioLogout.estatus=0
+    usuarioLogout.save()
+    messages.info(request, 'Saliste exitosamente')
     return redirect('index')
 
   
 def loginEntrar(request): 
-      
-
       if request.method == 'POST':
            form = FormularionLogin(request.POST)
            if form.is_valid():
               usuario = request.POST.get('username')
               contrasena = request.POST.get('password')
-              conf = Usuario.objects.filter(username=usuario,password=contrasena).exists()
-              if conf:
-                 messages.info(request,'bienvenido '+usuario)
-                 return redirect('menu')
+              option = Usuario.objects.filter(username=usuario,password=contrasena).exists()
+              if option:
+                 new_usuario = Usuario.objects.get(username=usuario,password=contrasena)
+                 new_usuarioPersonal = Personal.objects.get(fk_usuario=new_usuario.idusuario)
+                 request.session['username'] = new_usuario.username
+                 request.session['estatus'] = new_usuario.estatus
+                 request.session['idusuario'] = new_usuario.idusuario
+                 request.session['idpersonal'] =  new_usuarioPersonal.idpersonal
+                 usuarioLogeado = Usuario.objects.get(username=usuario)
+                 usuarioLogeado.estatus=1
+                 usuarioLogeado.save()
+                 messages.info(request,'bienvenido '+ usuario)
+                 if usuarioLogeado.rol == 'Empleado':
+                   return redirect('personal')
+                 elif usuarioLogeado.rol == 'Visitante':
+                   return redirect('menu')
               else:
                  messages.warning(request,'Usuario o contraseña incorrecta')
       form = FormularionLogin()
-      return render(request,'registration/login.html',{'form':form})
+      name = Usuario.objects.values('username')
+      return render(request,'registration/login.html',{'form':form,'name':name})
 
 
 
@@ -174,3 +187,30 @@ def EliminarUsuario(request,id):
      usern = get_object_or_404(Usuario, idusuario = id)
      usern.delete()
      return redirect('adminUsers')
+
+
+def inicioPersonal(request):
+   return render(request,'Personal/inicioPersonal.html')
+
+
+def perfilPersonal(request,idP,idU):
+   userP = get_object_or_404(Personal,idpersonal=idP)
+   userU = get_object_or_404(Usuario,idusuario=idU)
+
+   data={
+      'formP':FormularioPersonal(instance=userP),
+      'formU':formUser(instance=userU)
+   }
+
+   if request.method == 'POST':
+       formularioP = FormularioPersonal(data=request.POST, instance=userP, files=request.FILES)
+       formularioU = formUser(data=request.POST, instance=userU, files=request.FILES)
+       if formP.is_valid() and formU.is_valid():
+          formP.save()
+          formU.save()
+          messages.success(request,'La modificacion se llevo con exito')
+       else:
+          messages.warning(request,'No se pudo realizar la modificacion')
+       data['formP'] = formularioP
+       data['formU'] = formularioU
+   return render(request,'Personal/perfilPersonal.html',data)

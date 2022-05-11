@@ -1,0 +1,96 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.barra-nav{
+    position: fixed;
+    background-color: aliceblue;
+    height: 80px;
+    width: 100%;
+    box-shadow: 2px 2px 2px black;
+    z-index: 50;
+}
+
+
+
+.icon-bar{
+    font-size: 35px;
+    position: absolute;
+    right: 20px;
+    top:20px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.icon-bar:hover {
+    font-size: 37px;
+    color: rgb(65, 62, 62);
+}
+
+.ul-list{
+    position: absolute;
+    transform: translateX(-210px);
+    height: 1000px;
+    width: 200px;
+    background-color: rgb(250, 239, 232);
+    transition: all 0.5s;
+}
+
+.ul-list-active{
+    transform: translateX(0px);
+}
+
+/* .div-img{
+    position: absolute;
+    background-image: url("https://png.pngtree.com/png-vector/20200706/ourlarge/pngtree-businessman-user-character-vector-illustration-png-image_2298565.jpg");
+    background-position: center center;
+    background-size: contain;
+    height: 500px;
+    width: 500px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    ba
+
+} */
+.avatar{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-top: 15px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.items-li{
+    list-style: none;
+    background-color: black;
+    height: 30px;
+    line-height: 30px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-top:10px;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.items-li:hover {
+    background-color: rgb(68, 67, 67);
+}
+.items-li>a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+
+    width: 100px;
+}
+
+.name-user-nav{
+    text-align: center;
+
+}
+
+.content-formularioR{
+    padding-top: 130px;
+}

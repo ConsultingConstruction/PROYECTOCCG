@@ -50,6 +50,7 @@ class Usuario(models.Model):
     rol = models.CharField(db_column='Rol', max_length=15, db_collation='Modern_Spanish_CI_AS', blank=True, null=True, choices=CHOICESUSER)  # Field name made lowercase.
     fechacreacion = models.DateTimeField(db_column='fechaCreacion', blank=True, null=True,auto_now=True)  # Field name made lowercase.
     fechaact = models.DateTimeField(db_column='fechaAct',default=timezone.now)  # Field name made lowercase.
+    estatus = models.IntegerField(db_column='estatus',default=0)
 
     class Meta:
         managed = False
@@ -87,8 +88,8 @@ class Invitado(models.Model):
     cel = models.CharField(db_column='Cel', max_length=12, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     orgprocedencia = models.CharField(db_column='orgProcedencia', max_length=60, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
     descripcion = models.CharField(db_column='Descripcion', max_length=250, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
-    fk_usuario = models.ForeignKey(Usuario,db_column='fk_Usuario', blank=True, null=True, on_delete= models.CASCADE)  # Field name made lowercase.
-    fk_mundeleg = models.ForeignKey(Mundeleg, on_delete = models.CASCADE,db_column='fk_MunDeleg', blank=True, null=True)  # Field name made lowercase.
+    fk_usuario = models.IntegerField(db_column='fk_Usuario', blank=True, null=True)  # Field name made lowercase.
+    fk_mundeleg = models.IntegerField(db_column='fk_MunDeleg', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

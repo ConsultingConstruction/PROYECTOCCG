@@ -5,11 +5,10 @@
 
 
  <div class="ContainerVisitante">
-    <form method="post" class="visitante" id="formularioVisita">
+    <form method="post" class="visitante" id="formularioVisita" autocomplete="off">
         {% csrf_token %}
         <div class=" headerform">FORMULARIO DE VISITANTE</div>
-        
-         <div class="content-description">
+        <div class="content-description">
         <h3 class="datos-personales">Datos Personales:</h3>
         <label for="nombre">Nombre:</label>
         {{formV.nombre}}
