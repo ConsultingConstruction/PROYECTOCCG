@@ -1,13 +1,16 @@
 {% extends 'Personal/inicioPersonal.html' %}
 {% load static %}
+{% if request.session.idpersonal %}
 
 {% block container %}
-    
+ 
+
+
 <div class="content-formularioR">
        
     <form method="post" class="form-control" id="fomularioE" autocomplete="off">
       {% csrf_token %}
-      <div class=" headerformE">FORMULARIO DE EMPLEADO</div>   
+      <div class=" headerformE">PERFIL DEL EMPLEADO</div>   
       <div class="content-datos">
         <h3 class="datos-personalesE">Datos Personales:</h3>
       
@@ -29,8 +32,7 @@
               {{formP.curp}}
               <label>Telefono:</label> 
               {{formP.cel}}
-         </div>
-
+      </div>
          <hr>
         
          
@@ -101,12 +103,18 @@
 
                <label>Contraseña: {{formU.password}} </label>
                
-               <div class="bt-mostrarPass"  id="mostrarpass">Mostrar</div>
+               
             
             </div>
                  <center> <input type="button" value="Editar" class="bt-editar"></center>
-                 <center> <input type="submit" value="Registrar" class="bt-enviar-registro"></center>
-        
+                 <center> <input type="submit" value="Guardar" class="bt-enviar-registro"></center>
+                 {% if messages %}
+                 <ul class="messages">
+                   {% for message in messages %}
+                     <li class="{{ message.tags }}" style="background-color: rgb(235, 104, 104); position: absolute; bottom: 0; line-height: 40px; font-size: 25px; height: 40px; text-align: center; width: 100%; margin: auto; list-style: none; color: white;">{{ message }}</li>
+                   {% endfor %}
+                 </ul>
+               {% endif %}
     </form>
   </div>
           <!-- <script src="{% static 'js/jquery.chained' %}"></script> -->
@@ -122,3 +130,6 @@
         })
   </script>
 {% endblock %}
+{% else %}
+<h1>MAMASTE</h1>
+{% endif %}

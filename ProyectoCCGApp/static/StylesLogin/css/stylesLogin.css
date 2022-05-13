@@ -45,7 +45,31 @@ body{
     justify-content: center;
     align-items: center;
     position: relative;
+    
 }
+
+.inputs>#id_username{
+    height: 30px;
+    width: 80%;
+    margin: auto;
+    border-radius: 12px;
+}
+
+.inputs>#id_password{
+     height: 30px;
+     width: 80%;
+     margin: auto;
+     border-radius: 12px;
+
+}
+
+.text-pass{
+    position: absolute;
+    bottom: 30px;
+    color: red;
+    text-decoration: none;
+}
+
 .inputs{
     width: 90%;
     margin: auto;
@@ -193,7 +217,7 @@ input:active {
     height: 220px;
     padding: 40px;
     justify-items:self-start;
-    padding-top: 40px;
+    
 }
 
 .content-datos>label{
@@ -228,10 +252,8 @@ input:active {
    
 }
 
-.Boton-radio>li>label{
-    display: flex;
-    column-gap: 5px;
-}
+
+
 
 .direction-content{
     padding: 40px;
@@ -273,6 +295,48 @@ input:active {
   .bt-enviar-registro:hover {
     background-color: rgb(148, 223, 148);
 }
+
+.label-pass{
+    position: relative;
+}
+
+.bt-mostrarPass{
+  
+    font-size: 15px;
+    color: rgb(194, 194, 194);
+    position: absolute;
+    left: 210px;
+    top: 8px;
+    cursor: pointer;
+}
+/* 
+RESPONSIVE FORMULARIO DE REGISTRO EMPLEADO */
+
+@media screen and (max-width:1330px){
+    .content-datos{
+        grid-template-columns: repeat(4,1fr);
+        row-gap: 10px;
+    }
+    
+    .direccion-cnn{
+        width: 50%;
+        margin: auto;
+        grid-template-columns: repeat(2,1fr);
+        justify-items: self-start;
+        row-gap: 10px;
+    }
+
+    .content-paises{
+        width: 50%;
+        margin: auto;
+        grid-template-columns: repeat(2,1fr);
+        justify-items: self-start;
+        row-gap: 10px;
+
+    }
+    
+}
+
 
 /* ESTILOS DE LA PLANTILLA VISITANTE */
 .visitante{
@@ -383,18 +447,17 @@ textarea{
    height: 30px;
 }
 
-.bt-mostrarPass{
-    background-color: rgb(235, 235, 235); 
-    width: 200px; 
-    height: 30px; 
-    cursor: pointer; 
-    text-align: center; 
-    line-height: 30px; 
-    border-radius: 10px;
-    
-
-    
+.bt-mostrarPassV{
+  
+    font-size: 15px;
+    color: rgb(194, 194, 194);
+    position: absolute;
+    left: 210px;
+    top: 8px;
+    cursor: pointer;
 }
+
+
 
 .ContainerVisitante{
   margin-top: 200px;

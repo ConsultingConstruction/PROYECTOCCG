@@ -2,12 +2,12 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .forms import FormularionLogin,FormularioPersonal,FormulariUsuario,FormularioInvitado,formUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
-from .models import Usuario,Pais,Estado,Mundeleg,Cp,Personal
+from .models import Usuario,Pais,Estado,Mundeleg,Cp,Personal,Invitado
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ValidationError
-
-
+from django.utils import timezone
+from datetime import datetime
 def inicio(request):
     return render(request,'inicio.html',)
 
@@ -36,10 +36,8 @@ def inicio(request):
 #          form = LoginForm()
       
 #       return render(request,'registration/login.html',{'form':form,'message':message},)
-def logoutSalir(request,username):
-    usuarioLogout = Usuario.objects.get(username=username)
-    usuarioLogout.estatus=0
-    usuarioLogout.save()
+def logoutSalir(request):
+    del request.session['idpersonal']
     messages.info(request, 'Saliste exitosamente')
     return redirect('index')
 
@@ -53,19 +51,23 @@ def loginEntrar(request):
               option = Usuario.objects.filter(username=usuario,password=contrasena).exists()
               if option:
                  new_usuario = Usuario.objects.get(username=usuario,password=contrasena)
-                 new_usuarioPersonal = Personal.objects.get(fk_usuario=new_usuario.idusuario)
                  request.session['username'] = new_usuario.username
                  request.session['estatus'] = new_usuario.estatus
                  request.session['idusuario'] = new_usuario.idusuario
-                 request.session['idpersonal'] =  new_usuarioPersonal.idpersonal
                  usuarioLogeado = Usuario.objects.get(username=usuario)
-                 usuarioLogeado.estatus=1
+                 usuarioLogeado.fechaact = timezone.now()
                  usuarioLogeado.save()
                  messages.info(request,'bienvenido '+ usuario)
                  if usuarioLogeado.rol == 'Empleado':
-                   return redirect('personal')
+                    new_usuarioPersonal = Personal.objects.get(fk_usuario = new_usuario.idusuario)
+                    request.session['idpersonal'] =  new_usuarioPersonal.idpersonal
+                    request.session['usernameP'] = new_usuarioPersonal.nombre
+                    return redirect('personal')
                  elif usuarioLogeado.rol == 'Visitante':
-                   return redirect('menu')
+                    new_usuarioInvitado = Invitado.objects.get(fk_usuario = new_usuario.idusuario)
+                    request.session['idpersonal'] =  new_usuarioInvitado.idinvitado
+                    request.session['usernameP'] = new_usuarioInvitado.nombre
+                    return redirect('menu')
               else:
                  messages.warning(request,'Usuario o contraseña incorrecta')
       form = FormularionLogin()
@@ -193,10 +195,11 @@ def inicioPersonal(request):
    return render(request,'Personal/inicioPersonal.html')
 
 
-def perfilPersonal(request,idP,idU):
-   userP = get_object_or_404(Personal,idpersonal=idP)
-   userU = get_object_or_404(Usuario,idusuario=idU)
-
+def perfilPersonal(request):
+   ID = request.session['idpersonal']
+   ID2 = request.session['idusuario']
+   userP = get_object_or_404(Personal,idpersonal=ID)
+   userU = get_object_or_404(Usuario,idusuario=ID2)
    data={
       'formP':FormularioPersonal(instance=userP),
       'formU':formUser(instance=userU)
@@ -205,9 +208,10 @@ def perfilPersonal(request,idP,idU):
    if request.method == 'POST':
        formularioP = FormularioPersonal(data=request.POST, instance=userP, files=request.FILES)
        formularioU = formUser(data=request.POST, instance=userU, files=request.FILES)
-       if formP.is_valid() and formU.is_valid():
-          formP.save()
-          formU.save()
+       if formularioP.is_valid() and formularioU.is_valid():
+          
+          formularioP.save()
+          formularioU.save()
           messages.success(request,'La modificacion se llevo con exito')
        else:
           messages.warning(request,'No se pudo realizar la modificacion')

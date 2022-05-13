@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('', views.inicio, name='inicio'),
     path('login/', views.loginEntrar,name='index'),
-    path('logout/<username>',views.logoutSalir, name="logout"),
+    path('logout/',views.logoutSalir, name="logout"),
     path('registrar/',views.registrarUsuario,name="registrarEmp"),
     path('menu/',views.MenuUsuario, name="menu"),
     path('registrarV/',views.registrarVisistante,name='registrarVis'),
@@ -14,5 +14,5 @@ urlpatterns = [
     path('Modificar/<int:id>/', views.EditarUser, name ='modificar'), 
     path('Eliminar/<int:id>/',views.EliminarUsuario,name ='eliminar'),
     path('Personal/',views.inicioPersonal,name='personal'),
-    path('PerfilPersonal/<int:idU>/<int:idP>',views.perfilPersonal,name='perfilPersonal'), #url de acceso   
+    path('PerfilPersonal/',views.perfilPersonal,name='perfilPersonal'), #url de acceso   
 ]
