@@ -112,4 +112,3 @@ class formUser(ModelForm):
         model = Usuario
         fields = ('username','password','rol')
         
- 

@@ -15,4 +15,5 @@ urlpatterns = [
     path('Eliminar/<int:id>/',views.EliminarUsuario,name ='eliminar'),
     path('Personal/',views.inicioPersonal,name='personal'),
     path('PerfilPersonal/',views.perfilPersonal,name='perfilPersonal'), #url de acceso   
+    path('OMC23/',views.Omni23, name='omc23'),
 ]

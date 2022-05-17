@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .forms import FormularionLogin,FormularioPersonal,FormulariUsuario,FormularioInvitado,formUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
-from .models import Usuario,Pais,Estado,Mundeleg,Cp,Personal,Invitado
+from .models import Usuario,Pais,Estado,Mundeleg,Cp,Personal,Invitado,Omniclass23
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ValidationError
@@ -38,6 +38,11 @@ def inicio(request):
 #       return render(request,'registration/login.html',{'form':form,'message':message},)
 def logoutSalir(request):
     del request.session['idpersonal']
+    del request.session['username']
+    del request.session['estatus']
+    del request.session['idusuario']
+    del request.session['usernameP']
+
     messages.info(request, 'Saliste exitosamente')
     return redirect('index')
 
@@ -119,8 +124,6 @@ def registrarUsuario(request):
         return render(request,'RegistroEmpleado.html',{'pais':pais,'estado':estado,'municipio':municipio, 'cp': cp,'formU':formU,'formP':formP},)
 
 def registrarVisistante(request):
-
-        
       pais = Pais.objects.all()
       estado = Estado.objects.all()
       municipio = Mundeleg.objects.all()
@@ -148,7 +151,6 @@ def registrarVisistante(request):
                   return redirect('registrarVis')     
             else:
                  messages.warning(request, 'Ha ocuurido un error.')
-             
       else:
          formU = FormulariUsuario()
          formV = FormularioInvitado()
@@ -218,3 +220,9 @@ def perfilPersonal(request):
        data['formP'] = formularioP
        data['formU'] = formularioU
    return render(request,'Personal/perfilPersonal.html',data)
+
+
+def Omni23(request):
+   omc23 = Omniclass23.objects.all()
+   return render(request,'omc23.html',{'omc23':omc23})
+

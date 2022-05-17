@@ -94,3 +94,17 @@ class Invitado(models.Model):
     class Meta:
         managed = False
         db_table = 'Invitado'
+
+
+class Omniclass23(models.Model):
+    idomc23 = models.AutoField(db_column='idOmc23', primary_key=True)  # Field name made lowercase.
+    nummat = models.IntegerField(db_column='numMat', blank=True, null=True)  # Field name made lowercase.
+    codigo = models.CharField(db_column='Codigo', max_length=18, db_collation='Modern_Spanish_CI_AS')  # Field name made lowercase.
+    descrieng = models.CharField(db_column='descriEng', max_length=120, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    descrispa = models.CharField(db_column='descriSpa', max_length=120, db_collation='Modern_Spanish_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    nivel = models.IntegerField(db_column='Nivel')  # Field name made lowercase.
+    regfinal = models.BooleanField(db_column='regFinal', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Omniclass23'

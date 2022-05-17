@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'ProyectoCCG.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME':'C_CDATABASE',
+        'NAME':'ccdatabase1',
         'USER': 'israel',
         'PASSWORD': 'israel123',
         'HOST': 'CC-MX-BIM-009',  
