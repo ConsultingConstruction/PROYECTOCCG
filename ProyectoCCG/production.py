@@ -31,10 +31,10 @@ hostname = os.environ['DBHOST']
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': os.environ['DBNAME'],
-        'USER': os.environ['DBUSER'],
-        'PASSWORD': os.environ['DBPASS'],
-        'HOST': hostname,  
+        'NAME': 'ccdatabase1',
+        'USER': 'Adminccgroup',
+        'PASSWORD': '78907ggr9786ccgAEC',
+        'HOST': 'consultingconstructionserv.database.windows.net',  
         'PORT': '',
 
         'OPTIONS': {
