@@ -1,0 +1,13 @@
+asgiref==3.5.0
+distlib==0.3.4
+Django==3.2.13
+django-crispy-forms==1.14.0
+filelock==3.6.0
+mssql-django==1.0rc1
+Pillow==9.1.0
+platformdirs==2.5.2
+pyodbc==4.0.32
+pytz==2022.1
+six==1.16.0
+sqlparse==0.4.2
+tzdata==2022.1
