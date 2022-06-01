@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'ProyectoCCG.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME':'ccdatabase1',
-        'USER': 'devedujose',
-        'PASSWORD': '6986rty/**80C',
-        'HOST': 'consultingconstructionserv.database.windows.net',  
+        'NAME': os.environ['DBNAME'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD': os.environ['DBPASS'],
+        'HOST': os.environ['DBHOST'],  
         'PORT': '',
 
         'OPTIONS': {
