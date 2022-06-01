@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'ProyectoCCG.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME':'C_CDATABASE',
-        'USER': 'eduardo',
-        'PASSWORD': '654321',
-        'HOST': 'CC-MX-BIM-005',  
+        'NAME':'ccdatabase1',
+        'USER': 'devedujose',
+        'PASSWORD': '6986rty/**80C',
+        'HOST': 'consultingconstructionserv.database.windows.net',  
         'PORT': '',
 
         'OPTIONS': {
