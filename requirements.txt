@@ -11,3 +11,6 @@ pytz==2022.1
 six==1.16.0
 sqlparse==0.4.2
 tzdata==2022.1
+python-dotenv
+whitenoise
+django-cors-headers

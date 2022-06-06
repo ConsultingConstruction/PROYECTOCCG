@@ -84,10 +84,10 @@ DATABASES = {
         'USER': 'Adminccgroup',
         'PASSWORD': '78907ggr9786ccgAEC',
         'HOST': 'consultingconstructionserv.database.windows.net',  
-        'PORT': '',
+        'PORT': '1433',
 
         'OPTIONS': {
-            'driver': 'SQL Server Native Client 11.0',
+            'driver': 'ODBC Driver 17 for SQL Server',
         },
     }
 }

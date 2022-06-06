@@ -24,7 +24,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # DBHOST is only the server name, not the full URL
-hostname = os.environ['DBHOST']
+#hostname = os.environ['DBHOST']
 
 # Configure Postgres database; the full username for PostgreSQL flexible server is
 # username (not @sever-name).
@@ -35,10 +35,10 @@ DATABASES = {
         'USER': 'Adminccgroup',
         'PASSWORD': '78907ggr9786ccgAEC',
         'HOST': 'consultingconstructionserv.database.windows.net',  
-        'PORT': '',
+        'PORT': '1433',
 
         'OPTIONS': {
-            'driver': 'SQL Server Native Client 11.0',
+            'driver': 'ODBC Driver 17 for SQL Server',
         },
     }
 }
